@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GlassCard from "../components/GlassCard";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,42 +10,48 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Users as UsersIcon, Settings } from "lucide-react";
+import { listUsers } from "../lib/server";
 
 const Users = () => {
-    const [users] = useState([
-        {
-            id: 1,
-            name: "João Silva",
-            email: "joao.silva@ellp.com",
-            role: "volunteer",
-            status: "ativo",
-            createdAt: "2024-01-15",
-        },
-        {
-            id: 2,
-            name: "Maria Santos",
-            email: "maria.santos@ellp.com",
-            role: "coordinator",
-            status: "ativo",
-            createdAt: "2024-02-10",
-        },
-        {
-            id: 3,
-            name: "Pedro Oliveira",
-            email: "pedro.oliveira@ellp.com",
-            role: "volunteer",
-            status: "inativo",
-            createdAt: "2024-03-05",
-        },
-        {
-            id: 4,
-            name: "Ana Costa",
-            email: "ana.costa@ellp.com",
-            role: "parent",
-            status: "ativo",
-            createdAt: "2024-03-20",
-        },
-    ]);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const usersData = await listUsers();
+                if (usersData && usersData.length > 0) {
+                    setUsers(usersData);
+                } else {
+                    // Placeholder data
+                    setUsers([
+                        {
+                            id: "1",
+                            name: "Nenhum Usuário",
+                            email: "nenhum@email.com",
+                            role: "volunteer",
+                            status: "inativo",
+                            createdAt: new Date().toISOString(),
+                        },
+                    ]);
+                }
+            } catch (error) {
+                console.error("Failed to fetch users:", error);
+                // Placeholder data in case of error
+                setUsers([
+                    {
+                        id: "1",
+                        name: "Erro ao Carregar",
+                        email: "erro@email.com",
+                        role: "volunteer",
+                        status: "inativo",
+                        createdAt: new Date().toISOString(),
+                    },
+                ]);
+            }
+        };
+
+        fetchUsers();
+    }, []);
 
     const getRoleDisplayName = (role) => {
         const roleNames = {
@@ -127,9 +133,9 @@ const Users = () => {
                                         {getStatusBadge(user.status)}
                                     </TableCell>
                                     <TableCell className="text-blue-200">
-                                        {new Date(
-                                            user.createdAt,
-                                        ).toLocaleDateString("pt-BR")}
+                                        {new Date(user.createdAt).toLocaleDateString(
+                                            "pt-BR",
+                                        )}
                                     </TableCell>
                                     <TableCell>
                                         <Button
