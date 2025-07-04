@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import GlassCard from '../components/GlassCard';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Users, Settings } from 'lucide-react';
+import { Users as UsersIcon, Settings } from 'lucide-react';
 
 const Users = () => {
   const [users] = useState([
@@ -62,7 +62,7 @@ const Users = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
-            <Users className="w-8 h-8 text-blue-300" />
+            <UsersIcon className="w-8 h-8 text-blue-300" />
             <h1 className="text-3xl font-bold text-white">Gerenciar Usuários</h1>
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700 text-white">

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import GlassCard from '../components/GlassCard';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Layout-grid, Settings, Users } from 'lucide-react';
+import { LayoutGrid, Settings, Users } from 'lucide-react';
 
 const Classes = () => {
   const [classes] = useState([
@@ -63,7 +63,7 @@ const Classes = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
-            <Layout-grid className="w-8 h-8 text-blue-300" />
+            <LayoutGrid className="w-8 h-8 text-blue-300" />
             <h1 className="text-3xl font-bold text-white">Gerenciar Turmas</h1>
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700 text-white">
