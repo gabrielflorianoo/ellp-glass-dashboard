@@ -10,6 +10,10 @@ import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Users from "./pages/Users";
+import Students from "./pages/Students";
+import Classes from "./pages/Classes";
+import Reports from "./pages/Reports";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 
@@ -32,6 +36,38 @@ const App = () => (
                   element={
                     <ProtectedRoute>
                       <Dashboard />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/users" 
+                  element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                      <Users />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/students" 
+                  element={
+                    <ProtectedRoute allowedRoles={['admin', 'coordinator']}>
+                      <Students />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/classes" 
+                  element={
+                    <ProtectedRoute allowedRoles={['admin']}>
+                      <Classes />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/reports" 
+                  element={
+                    <ProtectedRoute allowedRoles={['admin', 'coordinator']}>
+                      <Reports />
                     </ProtectedRoute>
                   } 
                 />
